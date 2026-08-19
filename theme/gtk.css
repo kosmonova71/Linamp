@@ -1,0 +1,401 @@
+/* =========================
+   LinAmp GTK4 Theme — Tokyo Night
+   Modern Glassmorphic · 2026
+   ========================= */
+
+window,
+.background {
+    background-color: #1a1b26;
+    color: #c0caf5;
+}
+
+/* Backdrop / Inactive window */
+window:backdrop {
+    background-color: #1f2335;
+}
+
+/* ---- Header Bar ---- */
+headerbar {
+    background-color: rgba(26, 27, 38, 0.88);
+    border-bottom: 1px solid rgba(187, 154, 247, 0.15);
+    box-shadow: 0 1px 0 rgba(192, 202, 245, 0.06);
+    padding: 0 8px;
+}
+
+headerbar .title {
+    font-weight: 600;
+    letter-spacing: -0.2px;
+    color: #c0caf5;
+}
+
+/* ---- Buttons ---- */
+button {
+    background-color: rgba(192, 202, 245, 0.065);
+    color: #c0caf5;
+    border: 1px solid rgba(187, 154, 247, 0.16);
+    border-radius: 9999px;
+    padding: 7px 18px;
+    transition: all 0.25s cubic-bezier(0.4, 0.0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28),
+        inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+button:hover {
+    background-color: rgba(122, 162, 247, 0.14);
+    border-color: rgba(187, 154, 247, 0.32);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(192, 202, 245, 0.18);
+    transform: translateY(-1px);
+}
+
+button:active {
+    background-color: rgba(187, 154, 247, 0.24);
+    transform: translateY(0);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+button:disabled {
+    opacity: 0.45;
+}
+
+/* Suggested (Play / Primary action) */
+button.suggested-action {
+    background: linear-gradient(135deg, #7dcfff, #73daca);
+    color: #1a1b26;
+    border: 1px solid rgba(125, 207, 255, 0.55);
+    box-shadow: 0 4px 15px rgba(125, 207, 255, 0.42);
+}
+
+button.suggested-action:hover {
+    background: linear-gradient(135deg, #9ed8ff, #8be0d4);
+    box-shadow: 0 6px 18px rgba(125, 207, 255, 0.55);
+}
+
+/* Circular / Icon buttons */
+button.image-button,
+button.circular {
+    padding: 8px;
+    min-width: 42px;
+    min-height: 42px;
+    border-radius: 9999px;
+}
+
+/* Playback control buttons */
+.playback-button {
+    min-width: 48px;
+    min-height: 48px;
+}
+
+/* ---- Entry / Search ---- */
+entry,
+.search-entry {
+    background-color: rgba(26, 27, 38, 0.72);
+    border: 1px solid rgba(187, 154, 247, 0.2);
+    border-radius: 9999px;
+    padding: 9px 18px;
+    transition: all 0.2s ease;
+}
+
+entry:focus,
+.search-entry:focus {
+    border-color: #7dcfff;
+    box-shadow: 0 0 0 3.5px rgba(125, 207, 255, 0.22);
+    background-color: rgba(26, 27, 38, 0.92);
+}
+
+/* ---- Lists & Rows (Playlist) ---- */
+listview,
+list {
+    background-color: transparent;
+}
+
+row {
+    padding: 10px 16px;
+    border-radius: 12px;
+    transition: all 0.22s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+row:hover {
+    background-color: rgba(192, 202, 245, 0.075);
+}
+
+row:selected,
+row:selected:hover {
+    background-color: rgba(125, 207, 255, 0.17);
+    box-shadow: inset 0 0 0 1.5px rgba(125, 207, 255, 0.35);
+}
+
+/* Now Playing highlight */
+row.playing {
+    background-color: rgba(125, 207, 255, 0.11);
+    outline: 2px solid rgba(125, 207, 255, 0.4);
+    outline-offset: -3px;
+}
+
+/* ---- Tabs ---- */
+notebook>header {
+    background-color: transparent;
+}
+
+notebook tab {
+    background-color: rgba(26, 27, 38, 0.65);
+    border: 1px solid rgba(187, 154, 247, 0.13);
+    border-radius: 9999px;
+    padding: 8px 22px;
+    margin: 4px 3px;
+    transition: all 0.22s ease;
+}
+
+notebook tab:checked {
+    background-color: rgba(187, 154, 247, 0.19);
+    border-color: rgba(187, 154, 247, 0.5);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.32);
+}
+
+notebook>stack {
+    min-width: 350px;
+    min-height: 250px;
+}
+
+notebook>stack>box {
+    min-width: 350px;
+    min-height: 250px;
+}
+
+notebook>stack>box.visualizer-widget {
+    min-width: 350px;
+    min-height: 250px;
+}
+
+/* ---- Scale / Sliders ---- */
+scale>trough {
+    background-color: rgba(192, 202, 245, 0.11);
+    border-radius: 9999px;
+    min-height: 6px;
+}
+
+scale>highlight {
+    background: linear-gradient(to right, #7dcfff, #73daca);
+    border-radius: 9999px;
+}
+
+scale>slider {
+    background-color: #c0caf5;
+    border: 3.5px solid #7dcfff;
+    box-shadow: 0 3px 12px rgba(125, 207, 255, 0.45);
+    min-width: 19px;
+    min-height: 19px;
+    border-radius: 9999px;
+}
+
+/* ---- Button Helpers ---- */
+.control-button {
+    padding: 8px;
+}
+
+.icon-button {
+    padding: 4px;
+    min-width: 32px;
+    min-height: 32px;
+}
+
+/* Active state for toggle buttons */
+.active {
+    background-color: rgba(187, 154, 247, 0.35);
+    border-color: rgba(187, 154, 247, 0.7);
+    box-shadow: 0 0 12px rgba(187, 154, 247, 0.45);
+}
+
+/* Seek bar specific */
+.seek-bar scale>trough {
+    min-height: 5px;
+}
+
+/* ---- Cards & Visualizer ---- */
+.card {
+    background-color: rgba(26, 27, 38, 0.58);
+    border: 1px solid rgba(187, 154, 247, 0.12);
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(192, 202, 245, 0.08);
+}
+
+.visualizer-widget {
+    background-color: #1a1b26;
+    background-image: linear-gradient(135deg, #1a1b26 0%, #24283b 48%, #1a1b26 100%);
+    border: 2px solid rgba(125, 207, 255, 0.35);
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5),
+        inset 0 0 40px rgba(125, 207, 255, 0.1);
+    min-width: 0;
+    min-height: 0;
+}
+
+.visualizer-widget glarea,
+.visualizer-glarea {
+    background: transparent;
+    min-width: 0;
+    min-height: 0;
+}
+
+/* ---- Cover Art ---- */
+.player-cover {
+    border-radius: 16px;
+    box-shadow: 0 16px 45px rgba(0, 0, 0, 0.6),
+        inset 0 3px 0 rgba(192, 202, 245, 0.15);
+}
+
+/* ---- Popover / Menu ---- */
+popover,
+menu,
+.menu {
+    background-color: rgba(26, 27, 38, 0.95);
+    border: 1px solid rgba(187, 154, 247, 0.25);
+    border-radius: 14px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
+}
+
+popover>arrow {
+    background-color: rgba(26, 27, 38, 0.95);
+}
+
+/* ---- Scrollbars ---- */
+scrollbar {
+    background-color: transparent;
+}
+
+scrollbar slider {
+    background-color: rgba(187, 154, 247, 0.35);
+    border-radius: 9999px;
+    min-width: 6px;
+    min-height: 6px;
+}
+
+scrollbar slider:hover {
+    background-color: rgba(187, 154, 247, 0.55);
+}
+
+/* ---- Tooltips ---- */
+tooltip {
+    background-color: rgba(26, 27, 38, 0.96);
+    border: 1px solid rgba(187, 154, 247, 0.3);
+    border-radius: 8px;
+    color: #c0caf5;
+}
+
+/* ---- Reset / Danger button ---- */
+.reset-button {
+    background-color: rgba(247, 118, 142, 0.16);
+    border-color: rgba(247, 118, 142, 0.45);
+    color: #f7768e;
+}
+
+.reset-button:hover {
+    background-color: rgba(247, 118, 142, 0.28);
+}
+
+/* Helpers */
+.dim-label {
+    color: rgba(192, 202, 245, 0.55);
+}
+
+.track-label {
+    font-size: 1.18em;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+}
+
+.time-label {
+    font-size: 0.87em;
+    color: rgba(192, 202, 245, 0.68);
+}
+
+/* ---- Cover Art Shapes ---- */
+.cover-square {
+    border-radius: 16px;
+}
+
+.cover-circle {
+    border-radius: 50%;
+}
+
+.cover-rounded {
+    border-radius: 24px;
+}
+
+.cover-transition {
+    transition: all 0.3s ease;
+}
+
+/* ---- Equalizer Tab ---- */
+.eq-tab {
+    padding: 16px;
+}
+
+.section-header {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #c0caf5;
+    margin-bottom: 8px;
+}
+
+.eq-label {
+    font-size: 0.75em;
+    color: rgba(192, 202, 245, 0.7);
+}
+
+.eq-band {
+    background-color: rgba(26, 27, 38, 0.5);
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.eq-value-label {
+    font-size: 0.8em;
+    font-weight: 500;
+    color: #7dcfff;
+}
+
+.eq-scale {
+    min-height: 140px;
+}
+
+.eq-preset-btn {
+    font-size: 0.85em;
+    padding: 6px 12px;
+}
+
+/* ---- Playlist Tab ---- */
+.playlist-tab {
+    padding: 16px;
+}
+
+.sort-dropdown {
+    min-width: 140px;
+}
+
+.stats-label {
+    font-size: 0.85em;
+    color: rgba(192, 202, 245, 0.6);
+}
+
+.playlist-scrolled {
+    border-radius: 12px;
+    background-color: rgba(26, 27, 38, 0.4);
+}
+
+.playlist-view {
+    background-color: transparent;
+}
+
+.placeholder-label {
+    color: rgba(192, 202, 245, 0.5);
+}
+
+/* Highlight current track in playlist */
+.playlist-current {
+    font-weight: 700;
+    background-color: rgba(0, 180, 255, 0.15);
+    color: #00b4ff;
+}

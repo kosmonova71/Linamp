@@ -1,0 +1,51 @@
+[
+  {
+    "name": "AfterHours FM (AH.FM)",
+    "genre": "Trance",
+    "url": "http://198.244.201.21:8000/live",
+    "logo": "https://ah.fm/wp-content/uploads/2023/03/transparent-white.png",
+    "homepage": "https://ah.fm/"
+  },
+  {
+    "name": "Party107",
+    "genre": "Trance",
+    "url": "https://party107.com/listen/party107-192.mp3",
+    "logo": "https://www.party107.com/images/logo.jpg",
+    "homepage": "https://www.party107.com/"
+  },
+  {
+    "name": "Ganorium Radio",
+    "genre": "Uplifting Trance",
+    "url": "https://stream.ganorium.com",
+    "logo": "https://ik.imagekit.io/8lskxw561nyg/ganoriumradio/wp-content/uploads/2024/06/ganorium-radio-2024-icon.png",
+    "homepage": "https://www.ganorium.com/"
+  },
+  {
+    "name": "SKellyWays Radio",
+    "genre": "Trance",
+    "url": "https://s31.ssl-stream.com:8200/radio.mp3",
+    "logo": "https://skellywaysradio.com/SkellyWaysBadge.png",
+    "homepage": "https://skellywaysradio.com/"
+  },
+  {
+    "name": "SKellyWays Classic Trance",
+    "genre": "Classic Trance",
+    "url": "https://s31.ssl-stream.com:8210/radio.mp3",
+    "logo": "https://skellywaysradio.com/SkellyWaysBadge.png",
+    "homepage": "https://skellywaysradio.com/"
+  },
+  {
+    "name": "SomaFM - The Trip",
+    "genre": "Progressive Trance",
+    "url": "https://ice5.somafm.com/thetrip-128-mp3",
+    "logo": "https://somafm.com/logos/400/thetrip400.jpg",
+    "homepage": "https://somafm.com/thetrip/"
+  },
+  {
+    "name": "Intense Radio",
+    "genre": "Dance / Trance",
+    "url": "https://stream.intenseradio.net:8000/stream",
+    "logo": "https://www.intenseradio.net/wp-content/uploads/2023/09/intense2017-logo3.png",
+    "homepage": "https://www.intenseradio.net/"
+  }
+]
