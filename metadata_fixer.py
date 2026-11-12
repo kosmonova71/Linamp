@@ -37,12 +37,16 @@ try:
     )
 except ImportError:
     MUTAGEN_AVAILABLE = False
-    ID3NoHeaderError = Exception
-    ID3UnsupportedVersionError = Exception
-    HeaderNotFoundError = Exception
-    MutagenError = Exception
-    OggVorbis = None
-    _MUTAGEN_EXCEPTIONS = (OSError, AttributeError, KeyError)
+    File = None  # type: ignore[assignment,misc]
+    FLAC = None  # type: ignore[assignment,misc]
+    MP3 = None  # type: ignore[assignment,misc]
+    MP4 = None  # type: ignore[assignment,misc]
+    OggVorbis = None  # type: ignore[assignment,misc]
+    ID3NoHeaderError = Exception  # type: ignore[assignment,misc]
+    ID3UnsupportedVersionError = Exception  # type: ignore[assignment,misc]
+    HeaderNotFoundError = Exception  # type: ignore[assignment,misc]
+    MutagenError = Exception  # type: ignore[assignment,misc]
+    _MUTAGEN_EXCEPTIONS = (OSError, AttributeError, KeyError)  # type: ignore[assignment]
     logger.warning("mutagen library not available - limited functionality")
 
 
@@ -58,6 +62,14 @@ class FixResult:
 
 
 def _extract_id3_text(frame: Any) -> str:
+    """Extract text from an ID3 frame, handling various frame text formats.
+
+    Args:
+        frame: A mutagen ID3 frame object or any value.
+
+    Returns:
+        The text content as a string. Returns empty string if no text found.
+    """
     text = getattr(frame, "text", None)
     if text:
         return str(text[0]) if text else ""
@@ -67,9 +79,13 @@ def _extract_id3_text(frame: Any) -> str:
 class MetadataFixer:
     """Automatically complete missing metadata tags from filenames and folder structure."""
 
-    def __init__(self, **kwargs):
-        self.metadata = kwargs.get("metadata", {})
-        self.cleanup_options = kwargs.get("cleanup_options", {})
+    def __init__(
+        self,
+        metadata: dict[str, str] | None = None,
+        cleanup_options: dict[str, Any] | None = None,
+    ):
+        self.metadata = metadata if metadata is not None else {}
+        self.cleanup_options = cleanup_options if cleanup_options is not None else {}
         if not MUTAGEN_AVAILABLE:
             logger.warning("mutagen not available - using basic filename parsing")
 
@@ -215,7 +231,7 @@ class MetadataFixer:
         return album.strip()
 
     def _read_tags(self, file_path: str) -> dict[str, str]:
-        if not MUTAGEN_AVAILABLE:
+        if not MUTAGEN_AVAILABLE or File is None:
             return {}
         try:
             audio = File(file_path)
@@ -227,19 +243,21 @@ class MetadataFixer:
 
     def _extract_tag_dict(self, audio: Any) -> dict[str, str]:
         tags: dict[str, str] = {}
-        if isinstance(audio, MP3):
+        if MUTAGEN_AVAILABLE and MP3 is not None and isinstance(audio, MP3):
             id3 = audio.tags
             if id3:
                 tags["artist"] = self._get_id3_text(id3, "TPE1")
                 tags["title"] = self._get_id3_text(id3, "TIT2")
                 tags["album"] = self._get_id3_text(id3, "TALB")
                 tags["tracknumber"] = self._get_id3_text(id3, "TRCK")
-        elif isinstance(audio, (FLAC, OggVorbis)):
+        elif MUTAGEN_AVAILABLE and FLAC is not None and OggVorbis is not None and isinstance(
+            audio, (FLAC, OggVorbis)
+        ):
             tags["artist"] = self._get_first(audio, "artist")
             tags["title"] = self._get_first(audio, "title")
             tags["album"] = self._get_first(audio, "album")
             tags["tracknumber"] = self._get_first(audio, "tracknumber")
-        elif isinstance(audio, MP4):
+        elif MUTAGEN_AVAILABLE and MP4 is not None and isinstance(audio, MP4):
             tags["artist"] = self._get_mp4_text(audio, "\xa9ART")
             tags["title"] = self._get_mp4_text(audio, "\xa9nam")
             tags["album"] = self._get_mp4_text(audio, "\xa9alb")
@@ -264,10 +282,10 @@ class MetadataFixer:
         if not values:
             return ""
         if isinstance(values, list):
-            return str(values[0]) if values else ""
+            return str(values[0])
         return str(values)
 
-    def _get_mp4_text(self, audio: MP4, key: str) -> str:
+    def _get_mp4_text(self, audio: Any, key: str) -> str:
         values = audio.get(key)
         if not values:
             return ""
@@ -284,6 +302,8 @@ class MetadataFixer:
 
     def _apply_missing_tags(self, file_path: str, existing: dict[str, str], inferred: dict[str, str]) -> list[str]:
         if not MUTAGEN_AVAILABLE:
+            return []
+        if File is None:
             return []
         updated_fields: list[str] = []
         try:
@@ -306,13 +326,13 @@ class MetadataFixer:
             if not changes:
                 return []
 
-            if isinstance(audio, MP3):
+            if MUTAGEN_AVAILABLE and MP3 is not None and isinstance(audio, MP3):
                 self._set_id3_tags(audio.tags, changes)
-            elif isinstance(audio, FLAC):
+            elif MUTAGEN_AVAILABLE and FLAC is not None and isinstance(audio, FLAC):
                 self._set_flac_tags(audio, changes)
-            elif isinstance(audio, OggVorbis):
+            elif MUTAGEN_AVAILABLE and OggVorbis is not None and isinstance(audio, OggVorbis):
                 self._set_vorbis_tags(audio, changes)
-            elif isinstance(audio, MP4):
+            elif MUTAGEN_AVAILABLE and MP4 is not None and isinstance(audio, MP4):
                 self._set_mp4_tags(audio, changes)
             else:
                 for field, value in changes.items():
@@ -353,15 +373,15 @@ class MetadataFixer:
                     frame.text = [value]
                 break
 
-    def _set_flac_tags(self, audio: FLAC, changes: dict[str, str]) -> None:
+    def _set_flac_tags(self, audio: Any, changes: dict[str, str]) -> None:
         for tag_name, value in changes.items():
             audio[tag_name] = [value]
 
-    def _set_vorbis_tags(self, audio: OggVorbis, changes: dict[str, str]) -> None:
+    def _set_vorbis_tags(self, audio: Any, changes: dict[str, str]) -> None:
         for tag_name, value in changes.items():
             audio[tag_name] = [value]
 
-    def _set_mp4_tags(self, audio: MP4, changes: dict[str, str]) -> None:
+    def _set_mp4_tags(self, audio: Any, changes: dict[str, str]) -> None:
         mapping = {
             "artist": "\xa9ART",
             "title": "\xa9nam",
@@ -374,8 +394,10 @@ class MetadataFixer:
                 continue
             if key == "trkn":
                 try:
-                    track_num = int(re.match(r"(\d+)", value).group(1))
-                    audio[key] = [(track_num, 0)]
+                    match = re.match(r"(\d+)", value)
+                    if match:
+                        track_num = int(match.group(1))
+                        audio[key] = [(track_num, 0)]
                 except (ValueError, AttributeError):
                     audio[key] = [value]
             else:

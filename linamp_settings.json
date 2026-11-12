@@ -1,36 +1,33 @@
 {
   "auto_play_next": true,
-  "shuffle_mode": true,
-  "repeat_mode": "all",
-  "beat_aware_enabled": true,
+  "shuffle_mode": false,
+  "repeat_mode": "none",
+  "crossfade_enabled": false,
+  "crossfade_duration": 3.0,
+  "beat_aware_enabled": false,
   "beat_threshold": 0.1,
   "auto_download_covers": false,
-  "volume": 0.10448248035417507,
+  "volume": 0.7,
   "position": 0.0,
   "window_size": [
-    1020,
-    748
-  ],
-  "window_position": [
-    100,
-    100
+    1200,
+    782
   ],
   "equalizer_settings": [
-    5.0,
-    4.0,
-    3.0,
-    1.0,
     0.0,
-    1.0,
-    2.0,
-    3.0,
-    4.0,
-    5.0
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
   ],
-  "last_played_track": "/home/shadowyfigure/Videos/fire.mp3",
-  "last_played_position": 29.645957,
+  "last_played_track": "/home/shadowyfigure/Videos/02 Bitches.mp3",
+  "last_played_position": 0.0,
   "show_cover_art": true,
-  "cover_art_size": 650,
-  "cover_art_shape": "square",
-  "milkdrop_auto_switch": true
+  "cover_art_size": 350,
+  "cover_art_shape": "square"
 }
